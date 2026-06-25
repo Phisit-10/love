@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<title>Heart Flow</title>
+<style>
+body {
+    margin: 0;
+    background: #ffe4ec; /* 🌸 ชมพูอ่อน */
+    overflow: hidden;
+}
+
+.word {
+    position: absolute;
+    color: #ff3399; /* ปรับตัวหนังสือให้เข้ากับพื้นหลัง */
+    font-size: 16px;
+    font-family: sans-serif;
+}
+</style>
+</head>
+<body>
+
+<script>
+let text = "รักมุหมูน้า❤️🐽";
+let letters = [];
+
+let centerX = window.innerWidth / 2;
+let centerY = window.innerHeight / 2;
+
+for (let i = 0; i < 40; i++) {
+    let span = document.createElement("span");
+    span.className = "word";
+    span.innerText = text;
+
+    document.body.appendChild(span);
+    letters.push(span);
+}
+
+let offset = 0;
+
+function animate() {
+    offset += 0.005;
+
+    letters.forEach((el, i) => {
+        let t = offset + i * 0.2;
+
+        let x = 16 * Math.pow(Math.sin(t), 3);
+        let y = -(13 * Math.cos(t) - 5 * Math.cos(2*t) - 2 * Math.cos(3*t) - Math.cos(4*t));
+
+        el.style.left = (centerX + x * 18) + "px";
+        el.style.top = (centerY + y * 18) + "px";
+    });
+
+    requestAnimationFrame(animate);
+}
+
+animate();
+</script>
+
+</body>
+</html>
